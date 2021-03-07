@@ -27,8 +27,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ContactController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
-    private final int ROW_PER_PAGE = 8;
+    
+    @Value("${msg.rows_per_page}")
+    private int ROW_PER_PAGE;
 
     @Autowired
     private ContactService contactService;
