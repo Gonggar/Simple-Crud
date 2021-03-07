@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <title th:text="${add} ? 'Create a Contact' : 'Edit a Contact'" />
+        <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+    </head>
+    <body>
+
+	<div class="container">
+	<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+
+        <h1 th:text="${add} ? 'Create a Contact:' : 'Edit a Contact:'" />
+        <a th:href="@{/contacts}">Back to Contact List</a>
+        <br/><br/>
+        <form th:action="${add} ? @{/contacts/add} : @{/contacts/{contactId}/edit(contactId=${contact.id})}"
+              th:object="${contact}" method="POST">
+            <table class="table table-striped" border="0">
+                <tr th:if="${contact.id}">
+                    <td class="control-label">ID</td>
+                    <td>:</td>
+                    <td th:utext="${contact.id}">...</td>             
+                </tr>
+                <tr>
+                    <td class="control-label">Name</td>
+                    <td>:</td>
+                    <td><input type="text" class="form-control" th:field="*{name}" /></td>              
+                </tr>
+                <tr>
+                    <td class="control-label">Phone</td>
+                    <td>:</td>
+                    <td><input type="text" class="form-control" th:field="*{phone}" /></td>              
+                </tr>
+                <tr>
+                    <td class="control-label">Email</td>
+                    <td>:</td>
+                    <td><input type="text"  class="form-control" th:field="*{email}" /></td>              
+                </tr>
+                <tr>
+                    <td class="control-label">Address</td>
+                    <td>:</td>
+                    <td><input type="text"  class="form-control" th:field="*{address1}" size="50" /></td>              
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td><input type="text" class="form-control" th:field="*{address2}" size="50" /></td>              
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td><input type="text" class="form-control" th:field="*{address3}" size="50" /></td>              
+                </tr>
+                <tr>
+                    <td class="control-label">Postal Code</td>
+                    <td>:</td>
+                    <td><input type="text" class="form-control" th:field="*{postalCode}" /></td>              
+                </tr>
+                <tr>
+                    <td class="control-label">Notes</td>
+                    <td>:</td>
+                    <td><textarea th:field="*{note}" class="form-control"  rows="4" cols="50" /></td>
+                </tr>
+            </table>
+            <input type="submit" class="btn btn-success" th:value="${add} ? 'Create' : 'Update'" />
+        </form>
+
+        <br/>
+        <!-- Check if errorMessage is not null and not empty -->       
+        <div th:if="${errorMessage}" th:utext="${errorMessage}" class="error" />  
+        
+    </div>
+	</div>
+	</div>
+           
+    </body>
+</html>

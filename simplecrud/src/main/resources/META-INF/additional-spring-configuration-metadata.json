@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "msg.title",
+    "type": "java.lang.String",
+    "description": "A description for 'msg.title'"
+  },
+  {
+    "name": "msg.rows_per_page",
+    "type": "java.lang.String",
+    "description": "A description for 'msg.rows_per_page'"
+  }
+]}
