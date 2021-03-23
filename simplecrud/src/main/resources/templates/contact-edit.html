@@ -12,7 +12,7 @@
 	<div class="row">
 	<div class="col-md-6 col-md-offset-3">
 
-        <h1 th:text="${add} ? 'Create a Contact:' : 'Edit a Contact:'" />
+        <h1 h:text="${add} ? 'Cretate a Contact:' : 'Edit a Contact:'" />
         <a th:href="@{/contacts}">Back to Contact List</a>
         <br/><br/>
         <form th:action="${add} ? @{/contacts/add} : @{/contacts/{contactId}/edit(contactId=${contact.id})}"

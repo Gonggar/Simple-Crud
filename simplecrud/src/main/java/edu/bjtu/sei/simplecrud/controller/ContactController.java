@@ -24,13 +24,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+
 public class ContactController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     
     @Value("${msg.rows_per_page}")
-    private int ROW_PER_PAGE;
-
+    private String ROW_PER_PAGE;
+    
     @Autowired
     private ContactService contactService;
 
@@ -57,17 +58,20 @@ public class ContactController {
             // if notes object is not present in session, set notes in the request session
             request.getSession().setAttribute("LOGS_SESSION", logs);
         }
+
         String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+        int rows = Integer.parseInt(ROW_PER_PAGE);
+
         //String log = request.getUserPrincipal().getName() + "/" + timeStamp + "/" + "list contacts";
         String log = timeStamp + "/" + "list contacts";
         logs.add(log);
         request.getSession().setAttribute("LOGS_SESSION", logs);
 
-        List<Contact> contacts = contactService.findAll(pageNumber, ROW_PER_PAGE);
+        List<Contact> contacts = contactService.findAll(pageNumber, rows);
 
         long count = contactService.count();
         boolean hasPrev = pageNumber > 1;
-        boolean hasNext = (pageNumber * ROW_PER_PAGE) < count;
+        boolean hasNext = (pageNumber * rows) < count;
         model.addAttribute("contacts", contacts);
         model.addAttribute("hasPrev", hasPrev);
         model.addAttribute("prev", pageNumber - 1);
