@@ -85,6 +85,7 @@ public class ContactController {
             model.addAttribute("errorMessage", "Contact not found");
         }
         model.addAttribute("contact", contact);
+        model.addAttribute("contactimg","../images/p"+ contactId + ".jpg");
         return "contact";
     }
 
@@ -101,8 +102,10 @@ public class ContactController {
     public String addContact(Model model,
             @ModelAttribute("contact") Contact contact) {        
         try {
-            Contact newContact = contactService.save(contact);
-            return "redirect:/contacts/" + String.valueOf(newContact.getId());
+            //Contact newContact = contactService.save(contact);
+        	contactService.save(contact);
+        	int p = (int) Math.ceil(contactService.count()/ROW_PER_PAGE)+1;
+            return "redirect:/contacts?page=" + String.valueOf(p);
         } catch (Exception ex) {
             // log exception first, 
             // then show error

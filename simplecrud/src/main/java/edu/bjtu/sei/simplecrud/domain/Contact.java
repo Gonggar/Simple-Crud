@@ -30,7 +30,7 @@ public class Contact implements Serializable {
     @Size(max = 100)
     private String name;
     
-    @Pattern(regexp ="^(0[0-9]{2,3}/-)?([2-9][0-9]{6,7})+(/-[0-9]{1,4})?$", message = "Phone number")
+    //@Pattern(regexp ="^(0[0-9]{2,3}/-)?([2-9][0-9]{6,7})+(/-[0-9]{1,4})?$", message = "Phone number")
     @Size(max = 25)
     private String phone;
     
@@ -50,7 +50,7 @@ public class Contact implements Serializable {
     @Size(max = 20)
     private String postalCode;
     
-    @Size(max = 512)
+    @Size(max = 1024)
     private String note;
     
     public void setContact(Long Id, String Name, String Phone, String Email, String Address1, String Address2, String Address3, String Postalcode, String Note) {
