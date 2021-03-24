@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.bjtu.sei.simplecrud.mapper.ContactMapper">
+
+	<resultMap id="ContactResultMap" type="edu.bjtu.sei.simplecrud.domain.Contact">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="phone" column="phone"/>
+        <result property="email" column="email"/>
+        <result property="address1" column="address1"/>
+        <result property="address2" column="address2"/>
+        <result property="address3" column="address3"/>
+        <result property="postalCode" column="postal_code"/>
+        <result property="note" column="note"/>
+    </resultMap>
+
+	<insert id="save" useGeneratedKeys="true">
+        INSERT INTO contact (name,phone,email,address1,address2,address3,postal_code,note) VALUES (#{name}, #{phone}, #{email}, #{address1}, #{address2}, #{address3},#{postalCode}, #{note})
+    </insert>
+    
+    <select id="findAll" resultMap="ContactResultMap">
+        SELECT id, name, phone, email, address1, address2, address3, postal_code, note 
+        FROM contact 
+        ORDER BY id ASC
+    </select>
+    
+    <select id="find" resultMap="ContactResultMap" parameterType="Long">
+        SELECT id, name, phone, email, address1, address2, address3, postal_code, note
+        FROM contact
+        WHERE id = #{id}
+    </select>
+	
+	<update id="update" parameterType="edu.bjtu.sei.simplecrud.domain.Contact">
+        UPDATE contact 
+        SET 
+	        name = #{name},
+	        phone = #{phone},
+	        email = #{email},
+	        address1 = #{address1},
+	        address2 = #{address2},
+	        address3 = #{address3},
+	        postal_code = #{postalCode},
+	        note = #{note}
+        WHERE id = #{id}
+    </update>
+	
+	<delete id="delete" parameterType="Long">
+        DELETE FROM contact WHERE id = #{id}
+    </delete>
+</mapper>
