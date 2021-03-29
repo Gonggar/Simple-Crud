@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8" />
-        <title th:text="${add} ? 'Create a Contact' : 'Edit a Contact'" />
+        <title th:text="${add} ? 'Create a Contact' : 'Edit a Contact'"></title>
         <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
         <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
     </head>
@@ -12,7 +12,7 @@
 	<div class="row">
 	<div class="col-md-6 col-md-offset-3">
 
-        <h1 h:text="${add} ? 'Cretate a Contact:' : 'Edit a Contact:'" />
+        <h1 th:text="${add} ? 'Cretate a Contact:' : 'Edit a Contact:'"></h1>
         <a th:href="@{/contacts}">Back to Contact List</a>
         <br/><br/>
         <form th:action="${add} ? @{/contacts/add} : @{/contacts/{contactId}/edit(contactId=${contact.id})}"
@@ -61,7 +61,7 @@
                 <tr>
                     <td class="control-label">Notes</td>
                     <td>:</td>
-                    <td><textarea th:field="*{note}" class="form-control"  rows="4" cols="50" /></td>
+                    <td><textarea th:field="*{note}" class="form-control"  rows="4" cols="50"></textarea></td>
                 </tr>
             </table>
             <input type="submit" class="btn btn-success" th:value="${add} ? 'Create' : 'Update'" />
@@ -69,7 +69,7 @@
 
         <br/>
         <!-- Check if errorMessage is not null and not empty -->       
-        <div th:if="${errorMessage}" th:utext="${errorMessage}" class="error" />  
+        <div th:if="${errorMessage}" th:utext="${errorMessage}" class="error"></div>  
         
     </div>
 	</div>
