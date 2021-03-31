@@ -8,7 +8,8 @@ import edu.bjtu.sei.simplecrud.exception.BadResourceException;
 import edu.bjtu.sei.simplecrud.exception.ResourceAlreadyExistsException;
 import edu.bjtu.sei.simplecrud.exception.ResourceNotFoundException;
 import edu.bjtu.sei.simplecrud.mapper.ContactMapper;
-import edu.bjtu.sei.simplecrud.repository.ContactRepository;
+//import edu.bjtu.sei.simplecrud.repository.ContactRepository;
+
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +58,8 @@ public class ContactService {
 //        return contacts;
     }
     
-    public void save(Contact contact) throws BadResourceException, ResourceAlreadyExistsException {
+    @SuppressWarnings("deprecation")
+	public void save(Contact contact) throws BadResourceException, ResourceAlreadyExistsException {
         if (!StringUtils.isEmpty(contact.getName())) {
             if (contact.getId() != null && existsById(contact.getId())) { 
                 throw new ResourceAlreadyExistsException("Contact with id: " + contact.getId() +
@@ -73,7 +75,8 @@ public class ContactService {
         }
     }
     
-    public void update(Contact contact) 
+    @SuppressWarnings("deprecation")
+	public void update(Contact contact) 
             throws BadResourceException, ResourceNotFoundException {
         if (!StringUtils.isEmpty(contact.getName())) {
             if (!existsById(contact.getId())) {

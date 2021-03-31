@@ -37,11 +37,11 @@ public class ContactController {
     @Value("${msg.title}")
     private String title;
 
-    @GetMapping(value = {"/","/index"})
-    public String root() {
-    	
-        return "redirect:/contacts";
-    }
+//    @GetMapping(value = {"/","/index"})
+//    public String root() {
+//    	
+//        return "redirect:/contacts";
+//    }
 
     
     @GetMapping(value = "/contacts")

@@ -5,7 +5,11 @@ import java.util.List;
 
 public class BadResourceException extends Exception {
 
-    private List<String> errorMessages = new ArrayList<>();
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private List<String> errorMessages = new ArrayList<>();
             
     public BadResourceException() {
     }
