@@ -27,7 +27,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                             "/js/**",
                             "/css/**",
                             "/img/**",
-                            "/webjars/**").permitAll()
+                            "/webjars/**",
+                            "/swagger-ui/**").permitAll()
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()
@@ -39,7 +40,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         .clearAuthentication(true)
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                         .logoutSuccessUrl("/login?logout")
-                .permitAll();
+                        .permitAll()
+                .and()
+                	.csrf().disable();
     }
 
     @Bean

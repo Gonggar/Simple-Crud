@@ -63,13 +63,13 @@ public class ContactService {
         }
     }
     
-    public void update(Contact contact) 
+    public Contact update(Contact contact) 
             throws BadResourceException, ResourceNotFoundException {
         if (!StringUtils.isEmpty(contact.getName())) {
             if (!existsById(contact.getId())) {
                 throw new ResourceNotFoundException("Cannot find Contact with id: " + contact.getId());
             }
-            contactRepository.save(contact);
+            return contactRepository.save(contact);
         }
         else {
             BadResourceException exc = new BadResourceException("Failed to save contact");
