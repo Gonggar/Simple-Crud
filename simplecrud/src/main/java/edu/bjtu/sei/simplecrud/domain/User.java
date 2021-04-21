@@ -14,6 +14,7 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
+    private String username;
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -34,6 +35,13 @@ public class User {
         this.email = email;
         this.password = password;
     }
+    
+    public User(String userName, String email, String password) {
+        this.username = userName;
+        this.email = email;
+        this.password = password;
+    }
+    
 
     public User(String firstName, String lastName, String email, String password, Collection<Role> roles) {
         this.firstName = firstName;

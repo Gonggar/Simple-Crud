@@ -27,7 +27,10 @@ public class UserServiceImpl implements UserService {
     private BCryptPasswordEncoder passwordEncoder;
 
     public User findByEmail(String email){
-        return userRepository.findByEmail(email);
+		User user = userRepository.findByEmail(email)
+				.orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + email));
+
+        return user;
     }
 
     public User save(UserRegistrationDto registration){
@@ -42,10 +45,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(email);
-        if (user == null){
-            throw new UsernameNotFoundException("Invalid username or password.");
-        }
+		User user = userRepository.findByEmail(email)
+				.orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + email));
+//
+//        User user = userRepository.findByEmail(email);
+//        if (user == null){
+//            throw new UsernameNotFoundException("Invalid username or password.");
+//        }
         return new org.springframework.security.core.userdetails.User(user.getEmail(),
                 user.getPassword(),
                 mapRolesToAuthorities(user.getRoles()));
