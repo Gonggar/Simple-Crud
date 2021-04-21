@@ -10,12 +10,13 @@ import org.springframework.stereotype.Component;
 
 import edu.bjtu.sei.simplecrud.security.services.UserDetailsImpl;
 import io.jsonwebtoken.*;
+//import io.jsonwebtoken.Jwts;
 
 @Component
 public class JwtUtils {
 	private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
-//	simplecrud.app.jwtSecret= bezKoderSecretKey
+//	simplecrud.app.jwtSecret= javaEESpringSecretKey
 //	simplecrud.app.jwtExpirationMs= 86400000
 
 	@Value("${simplecrud.app.jwtSecret}")

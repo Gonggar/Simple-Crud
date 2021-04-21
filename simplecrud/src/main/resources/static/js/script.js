@@ -1,7 +1,8 @@
 $(document).ready(function(){
     var currentid = '';
+    var jwt ='';
     $("#update").hide();
-
+	getJWToken();
     assignDataToTable();
 
     $('table').on('click', 'button[id="delete"]', function(e){
@@ -29,6 +30,10 @@ $(document).ready(function(){
           type:"GET",
           contentType: "application/json",
           url:"http://localhost:8080/api/contacts/"+id,
+          beforeSend:function(request) {
+                request.setRequestHeader("Authorization", "Bearer "+jwt);
+            },
+          
           success: function(data) {
             var contact = JSON.parse(JSON.stringify(data));
             $("#name").val(contact.name);
@@ -67,6 +72,10 @@ $(document).ready(function(){
                 data: JSON.stringify(jsonVar),
                 contentType: "application/json",
                 url:"http://localhost:8080/api/contacts/" + currentid,
+                beforeSend:function(request) {
+                	request.setRequestHeader("Authorization", "Bearer "+jwt);
+                },
+                
                 success: function(data){
                     alertUsing("Update.", true);
                     $("#update").hide();
@@ -109,6 +118,10 @@ $(document).ready(function(){
             url:"http://localhost:8080/api/contacts/add",
             data: JSON.stringify(jsonVar),
             contentType: "application/json",
+            beforeSend:function(request) {
+                request.setRequestHeader("Authorization", "Bearer "+jwt);
+            },
+            
             success: function(data){
                 assignDataToTable();
             },
@@ -126,6 +139,10 @@ $(document).ready(function(){
           type:"GET",
           contentType: "application/json",
           url:"http://localhost:8080/api/contacts",
+          beforeSend:function(request) {
+                request.setRequestHeader("Authorization", "Bearer "+jwt);
+            },
+          
           success: function(data) {
             var contacts = JSON.parse(JSON.stringify(data));
             for (var i in contacts) {
@@ -168,5 +185,28 @@ $(document).ready(function(){
 			2000);
 
 	  }
+	  
+	  function getJWToken() {
+	         var jsonVar = {
+                username: "yoyo@123.com",
+                password:"123456"
+             };
+
+        $.ajax({
+            type:"POST",
+            url:"http://localhost:8080/api/auth/signin",
+            data: JSON.stringify(jsonVar),
+            contentType: "application/json",
+            success: function(data){
+            	var signin = JSON.parse(JSON.stringify(data));
+            	jwt = signin.accessToken;
+                assignDataToTable();
+            },
+            error: function(err) {
+                console.log(err);
+                alert(err.responseText);
+            }
+        });
+     }	 
 
 });
