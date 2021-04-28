@@ -43,7 +43,11 @@
 			<artifactId>jjwt</artifactId>
 			<version>0.9.1</version>
 		</dependency>
-
+	    <dependency>
+	      <groupId>com.github.vladimir-bukhtoyarov</groupId>
+	      <artifactId>bucket4j-core</artifactId>
+	      <version>6.2.0</version>
+	    </dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
